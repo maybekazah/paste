@@ -13,6 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::view('/', 'welcome');
+
+Route::get('pastes', [\App\Http\Controllers\PasteController::class, 'index'])->name('pastes.index');
+Route::get('pastes/{paste}', [\App\Http\Controllers\PasteController::class, 'show'])->name('pastes.show');
+Route::get('pastes/{paste}/edit', [\App\Http\Controllers\PasteController::class, 'edit'])->name('pastes.edit');
+Route::get('pastes/create', [\App\Http\Controllers\PasteController::class, 'create'])->name('pastes.create');
+Route::post('pastes', [\App\Http\Controllers\PasteController::class, 'store'])->name('pastes.store');
+
+Route::middleware('guest')->group(function () {
+    Route::get('register', [\App\Http\Controllers\UserController::class, 'registerForm'])->name('register');
+    Route::post('register_process', [\App\Http\Controllers\UserController::class, 'registerProcess'])->name('register_process');
+    Route::get('login', [\App\Http\Controllers\UserController::class, 'loginForm']);
+    Route::post('login_process', [\App\Http\Controllers\UserController::class, 'loginProcess']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('logout', [\App\Http\Controllers\UserController::class, 'logout'])->name('logout');
 });
