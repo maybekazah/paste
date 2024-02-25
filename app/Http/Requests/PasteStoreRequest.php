@@ -11,7 +11,7 @@ class PasteStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class PasteStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-        ];
+            'title' => 'required|string',
+            'text' => 'required|string',
+            'user_id' => 'nullable|int',
+            'expired_at' => 'date',
+            'status' => 'required|string',
+            ];
     }
 }
