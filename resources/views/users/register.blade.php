@@ -3,8 +3,6 @@
     register page
 @endsection
 @section('body')
-
-
     <div class="container">
         {{session('abort') ?? NULL}}
         <form action="{{route('register_process')}}" method="POST">

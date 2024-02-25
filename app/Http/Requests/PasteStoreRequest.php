@@ -24,9 +24,10 @@ class PasteStoreRequest extends FormRequest
         return [
             'title' => 'required|string',
             'text' => 'required|string',
-            'user_id' => 'nullable|int',
-            'expired_at' => 'date',
             'status' => 'required|string',
+            'user_id' => 'nullable|int',
+            'expired_at' => 'required|date',
+
             ];
     }
 }

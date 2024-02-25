@@ -3,7 +3,6 @@
     Pastes
 @endsection
 @section('body')
-    <div class="container text-left">
         <div class="row">
             <div class="col">
                 {{session('success') ?? NULL}}
@@ -39,10 +38,10 @@
                     {{$message}}
                     @enderror
                     <select class="form-select mt-3" id="status" name="status">
-                        <option selected value="public">Выбрать параметры доступа (по умолчанию public, видна всем)
+                        <option selected value="{{\App\Enums\PastaStatusEnum::PUBLIC->value}}">Выбрать параметры доступа (по умолчанию public, видна всем)
                         </option>
-                        <option value="unlisted">unlisted (доступ по ссылке)</option>
-                        <option value="private">private (доступна только автору)</option>
+                        <option value="{{\App\Enums\PastaStatusEnum::UNLISTED->value}}">unlisted (доступ по ссылке)</option>
+                        <option value="{{\App\Enums\PastaStatusEnum::PRIVATE->value}}">private (доступна только автору)</option>
                     </select>
 
                     <input type="hidden" name="user_id" value="{{auth()->id() ?? NULL}}">
@@ -50,9 +49,6 @@
                     <button type="submit" class="btn btn-success mt-3">Опубликовать</button>
                 </form>
             </div>
-            <div class="col">
                 @include('layouts.sidebar')
-            </div>
         </div>
-    </div>
 @endsection
