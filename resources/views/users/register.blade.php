@@ -4,7 +4,7 @@
 @endsection
 @section('body')
     <div class="container">
-        {{session('abort') ?? NULL}}
+        {{session('message') ?? NULL}}
         <form action="{{route('register_process')}}" method="POST">
             @csrf
             <div class="container mb-3">

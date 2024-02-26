@@ -4,8 +4,7 @@
 @endsection
 @section('body')
     <div class="container">
-        {{session('logout') ?? NULL}}
-        {{session('error') ?? NULL}}
+        {{session('message') ?? NULL}}
         <form action="{{route('login_process')}}" method="POST">
             @csrf
             <div class="container mb-3">

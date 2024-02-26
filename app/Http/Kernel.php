@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\ShortLink;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel

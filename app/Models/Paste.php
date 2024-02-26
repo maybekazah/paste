@@ -13,7 +13,6 @@ class Paste extends Model
         'text',
         'status',
         'user_id',
-        'link',
         'short_link',
         'expired_at',
     ];

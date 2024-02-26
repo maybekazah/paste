@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->text('text')->nullable();
-            $table->string('status')->default(\App\Enums\PastaStatusEnum::PUBLIC->value)->nullable();
-            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('link')->nullable();
+            $table->string('status')->default(\App\Enums\PastaStatusEnum::PUBLIC->value);
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('short_link')->nullable();
             $table->timestamp('expired_at')->nullable();
             $table->timestamps();

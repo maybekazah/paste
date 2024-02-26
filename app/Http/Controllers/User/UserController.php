@@ -6,9 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Services\Abstract\IUserService;
 
 class UserController extends Controller
 {
+    public function __construct(
+        protected IUserService $userService,
+    )
+    {
+    }
+
     public function loginForm()
     {
         return view('users.login');
@@ -16,14 +23,8 @@ class UserController extends Controller
 
     public function loginProcess(AuthRequest $request)
     {
-        if (auth()->attempt($request->validated()))
-        {
-            session()->flash('success', 'Вы успешно вошли в аккаунт');
-            return redirect()->route('pastes.index');
-        }
-
-        session()->flash('error', 'Ошибка входа');
-        return redirect()->back();
+        $this->userService->loginProcess($request);
+        return redirect()->route('pastes.index');
     }
 
     public function registerForm()
@@ -33,23 +34,15 @@ class UserController extends Controller
 
     public function registerProcess(RegisterRequest $request)
     {
-        $user = User::query()->create($request->validated());
+        $this->userService->registerProcess($request);
+        return redirect()->route('pastes.index');
 
-        if ($user)
-        {
-            auth()->login($user);
-            session()->flash('success', 'Вы успешно зарегистрировались');
-            return redirect()->route('pastes.index');
-        }
-
-        session()->flash('error', 'Ошибка регистрации');
-        return redirect()->back();
     }
 
     public function logout()
     {
-        auth()->logout();
-        session()->flash('success', 'вы вышли из аккаунта');
+        $this->userService->logout();
         return redirect()->route('pastes.index');
+
     }
 }
