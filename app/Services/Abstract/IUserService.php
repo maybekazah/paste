@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterRequest;
 
 interface IUserService
 {
+    public function getPastes();
     public function loginProcess(AuthRequest $request);
 
     public function registerProcess(RegisterRequest $request);

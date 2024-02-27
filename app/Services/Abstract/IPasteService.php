@@ -11,8 +11,6 @@ interface IPasteService
 
     public function getAuthShowPastes();
 
-    public function getMyPastes();
-
     public function show($link);
 
     public function store($request);

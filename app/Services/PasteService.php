@@ -6,17 +6,11 @@ use App\Enums\PastaStatusEnum;
 use App\Http\Requests\PasteStoreRequest;
 use App\Models\Paste;
 use App\Services\Abstract\IPasteService;
+use App\Traits\PasteTrait;
 
 class PasteService implements IPasteService
 {
-    public function getPastes()
-    {
-        return Paste::query()
-            ->where('status', '=', PastaStatusEnum::PUBLIC->value)
-            ->orderBy('created_at', 'DESC')
-            ->paginate(10);
-
-    }
+use PasteTrait;
 
     public function getAuthShowPastes()
     {
@@ -25,14 +19,6 @@ class PasteService implements IPasteService
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
 
-    }
-
-    public function getMyPastes()
-    {
-        return Paste::query()
-            ->where('user_id', auth()->id())
-            ->orderBy('created_at', 'DESC')
-            ->paginate(10);
     }
 
     public function show($link)

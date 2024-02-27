@@ -24,8 +24,7 @@
                 {{$message}}
                 @enderror
                 <select class="form-select mt-3" id="expired_at" name="expired_at">
-                    <option selected value="{{NULL}}">{{old('text') ?? 'Срок доступа (по умолчанию без ограничения'}})
-                    </option>
+                    <option selected value="{{NULL}}">Срок доступа (по умолчанию без ограничения)</option>
                     <option value="{{now()->addMinutes(10)}}">10 мин</option>
                     <option value="{{now()->addHour()}}">1 час</option>
                     <option value="{{now()->addHours(3)}}">3 часа</option>
@@ -54,5 +53,6 @@
             </form>
         </div>
         @include('layouts.sidebar')
+        @include('layouts.authsidebar')
     </div>
 @endsection

@@ -27,5 +27,5 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('user/logout', [\App\Http\Controllers\User\UserController::class, 'logout'])->name('logout');
-    Route::get('user/my_pastes', [\App\Http\Controllers\Paste\PasteController::class, 'myPastes'])->name('my_pastes');
+    Route::get('user/my_pastes', [\App\Http\Controllers\Paste\PasteController::class, 'getAuthShowPastes'])->name('my_pastes');
 });

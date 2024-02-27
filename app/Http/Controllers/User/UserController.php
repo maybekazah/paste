@@ -7,18 +7,22 @@ use App\Http\Requests\AuthRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use App\Services\Abstract\IUserService;
+use App\Traits\PasteTrait;
 
 class UserController extends Controller
 {
+
     public function __construct(
-        protected IUserService $userService,
+        protected IUserService $userService
     )
     {
     }
 
     public function loginForm()
     {
-        return view('users.login');
+
+        $pastes = $this->userService->getPastes();
+        return view('users.login', compact('pastes'));
     }
 
     public function loginProcess(AuthRequest $request)
@@ -29,7 +33,9 @@ class UserController extends Controller
 
     public function registerForm()
     {
-        return view('users.register');
+        $pastes = $this->userService->getPastes();
+
+        return view('users.register', compact('pastes'));
     }
 
     public function registerProcess(RegisterRequest $request)

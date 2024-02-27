@@ -1,22 +1,17 @@
 <div class="col">
     <h5>10 последних паст паблик:</h5>
-    <hr>
     @foreach($pastes as $paste)
-        ID пасты:  {{$paste->id}}<br>
-        Заголовок пасты:  {{$paste->title}}<br>
-        Текст пасты:  {{$paste->text}}<br>
+        <b>ID пасты:</b>  {{$paste->id}}<br>
+        <b>ID пользователя:</b> {{$paste->user_id ?? "Аноним"}}<br>
+        <b>Заголовок пасты:</b>  {{$paste->title}}<br>
+        <b>Текст пасты:</b>  {{$paste->text}}<br>
+        <b>Создано:</b> {{$paste->created_at->diffForHumans()}}<br>
+        <b>Статус:</b> {{$paste->status}}<br>
+        <b>Время истекания доступа к пасте:</b> {{$paste->expired_at ?? "Бессрочно"}}<br>
+        <b>Короткая ссылка:</b> <a
+                href="{{route('pastes.show', $paste->short_link)}}">{{"https://paste.loc/" . $paste->short_link}}
+        </a><br>
         <hr>
     @endforeach
 </div>
-<div class="col">
-    @auth()
-        <h5>10 паст авторизованного пользователя:</h5>
-        <hr>
-        @foreach($authShowPastes as $authShowPaste)
-            ID пасты:  {{$authShowPaste->id}}<br>
-            Заголовок пасты:  {{$authShowPaste->title}}<br>
-            Текст пасты:  {{$authShowPaste->text}}<br>
-            <hr>
-        @endforeach
-    @endauth
-</div>
+
