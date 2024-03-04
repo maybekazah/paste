@@ -23,10 +23,16 @@ use PasteTrait;
 
     public function show($link)
     {
+
         $pastaShow = Paste::all()->where('short_link', $link)->first();
         if (empty($pastaShow)) {
             abort(404);
         }
+
+        elseif ($pastaShow->status == PastaStatusEnum::PRIVATE->value && $pastaShow->user_id != auth()->id()) {
+            abort(404);
+        }
+
         return $pastaShow;
     }
 
